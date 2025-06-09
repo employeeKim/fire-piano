@@ -1,15 +1,42 @@
-// src/components/HeroSection.jsx
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
+import '../css/HeroSection.css';
+import slide1 from '../assets/images/slide1.jpg';
+import slide2 from '../assets/images/slide2.jpg';
+import slide3 from '../assets/images/slide3.jpg';
+
 function HeroSection() {
+    const slides = [slide1, slide2, slide3];
+
     return (
-        <div className="relative h-[500px] bg-cover bg-center" style={{ backgroundImage: "url('/images/music-hero.jpg')" }}>
-            <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center text-white text-center px-4">
-                <h1 className="text-4xl md:text-6xl font-bold">🎵 음악은 삶입니다</h1>
-                <p className="mt-4 text-lg md:text-2xl">취미, 입시, 실용음악까지 모두 한 곳에서</p>
-                <button className="mt-6 px-6 py-2 bg-yellow-400 hover:bg-yellow-300 rounded-full text-black font-semibold">
-                    수업 문의하기
-                </button>
-            </div>
-        </div>
+        <section className="hero-slider">
+            <Swiper
+                modules={[Navigation, Pagination, Autoplay, EffectFade]}
+                spaceBetween={0}
+                slidesPerView={1}
+                navigation
+                pagination={{ clickable: true }}
+                effect="fade"
+                autoplay={{ delay: 5000, disableOnInteraction: false }}
+                loop
+            >
+                {slides.map((src, i) => (
+                    <SwiperSlide key={i}>
+                        <div className="slide" style={{ backgroundImage: `url(${src})` }}>
+                            <div className="slide-overlay">
+                                <h1>불꽃피아노</h1>
+                                <p>입시, 취미, 실용음악까지 모두 이곳에서</p>
+                                <button>수업 문의하기</button>
+                            </div>
+                        </div>
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+        </section>
     );
 }
 
